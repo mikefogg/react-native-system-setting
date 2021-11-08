@@ -251,10 +251,8 @@ RCT_EXPORT_METHOD(activeListener:(NSString *)type resolve:(RCTPromiseResolveBloc
                                body:@{@"value": [NSNumber numberWithFloat:newValue]}];
         }
 
-
         if(skipSetVolumeCount == 0 && hasListeners){
-						NSDictionary *userInfo = [notification userInfo];
-						NSString *reason = [userInfo objectForKey:@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"];
+						NSString *reason = [change objectForKey:@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"];
 						if (volumeChangeListenerReasons.count == 0 || [volumeChangeListenerReasons containsObject:reason]) {
 								float newValue = [change[@"new"] floatValue];
 								[self sendEventWithName:@"EventVolume" body:@{@"value": [NSNumber numberWithFloat:newValue]}];
